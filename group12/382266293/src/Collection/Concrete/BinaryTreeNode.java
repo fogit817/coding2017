@@ -50,6 +50,8 @@ public class BinaryTreeNode<E extends Comparable<E>> {
                         break;
                     }
                     p = p.right;
+                } else {
+                	throw new IllegalArgumentException("Data already existed: " + o);
                 }
             }
             size++;
