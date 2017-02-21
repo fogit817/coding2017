@@ -1,5 +1,6 @@
 package Collection.Concrete;
 import Collection.AbstractList;
+import Collection.Iterator;
 
 public class Queue<E> extends AbstractList<E> {
 	
@@ -35,6 +36,11 @@ public class Queue<E> extends AbstractList<E> {
 	public int size() {
 		return myList.size();
 	}
+	
+	@Override
+	protected Iterator<E> iterator() {
+		return myList.iterator();
+	}
 
 	@Override
 	public int hashCode() {
@@ -60,6 +66,8 @@ public class Queue<E> extends AbstractList<E> {
 			return false;
 		return true;
 	}
+
+
 
 
 	

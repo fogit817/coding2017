@@ -1,5 +1,7 @@
 package Collection.Concrete;
 
+import java.util.HashSet;
+import java.util.Set;
 
 public class BinaryTreeNode<E extends Comparable<E>> {
 	
@@ -7,6 +9,8 @@ public class BinaryTreeNode<E extends Comparable<E>> {
 	private BinaryTreeNode left;
 	private BinaryTreeNode right;
 	private int size;
+	private static Set mySet = new HashSet();
+	
 	
 	public BinaryTreeNode() {
 		this.data = null;
@@ -51,21 +55,30 @@ public class BinaryTreeNode<E extends Comparable<E>> {
                     }
                     p = p.right;
                 } else {
-                	throw new IllegalArgumentException("Data already existed: " + o);
+                	return null;
                 }
             }
             size++;
         }
         return res;
     }
+    
+    
 
-    public void preOrder(BinaryTreeNode<E> node) {
+    public Set<E> preOrderTranverse(BinaryTreeNode<E> node) {
         if (node != null) {
-            preOrder(node.left);
-            System.out.print(node.data + ",");
-            preOrder(node.right);
+        	preOrderTranverse(node.left);
+        	mySet.add(node.data);
+            preOrderTranverse(node.right);
         }
+        return mySet;
     }
+
+	@Override
+	public String toString() {
+		preOrderTranverse(this);
+		return mySet.toString();
+	}
 
 	public E getData() {
 		return data;
@@ -110,8 +123,5 @@ public class BinaryTreeNode<E extends Comparable<E>> {
 			return false;
 		return true;
 	}
-
-
-	
 
 }

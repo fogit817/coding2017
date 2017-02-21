@@ -7,16 +7,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
-import com.sun.org.apache.regexp.internal.recompile;
-import com.sun.swing.internal.plaf.basic.resources.basic;
-
 import Collection.Iterator;
 import Collection.List;
-import Collection.Concrete.ArrayList;
 import Collection.Concrete.LinkedList;
 import junit.framework.TestCase;
-import sun.awt.ModalityListener;
+
 
 public class LinkedListTest extends TestCase {
 

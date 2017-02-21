@@ -10,4 +10,7 @@ public interface List<E> {
 	
 	public boolean isEmpty();
 	
+	public int indexOf(E e);
+
+	
 }

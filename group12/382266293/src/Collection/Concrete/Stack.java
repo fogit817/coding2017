@@ -1,6 +1,7 @@
 package Collection.Concrete;
 
 import Collection.AbstractList;
+import Collection.Iterator;
 
 public class Stack<E> extends AbstractList<E> {
 	
@@ -34,6 +35,11 @@ public class Stack<E> extends AbstractList<E> {
 	@Override
 	public E get(int index) {
 		return myList.get(index);
+	}
+	
+	@Override
+	protected Iterator<E> iterator() {
+		return myList.iterator();
 	}
 
 	@Override
