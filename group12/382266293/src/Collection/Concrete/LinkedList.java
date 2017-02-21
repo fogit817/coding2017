@@ -1,9 +1,6 @@
 package Collection.Concrete;
 
-import static util.Print.println;
-
 import java.util.NoSuchElementException;
-
 import Collection.AbstractList;
 import Collection.Iterator;
 
@@ -196,23 +193,4 @@ public class LinkedList<E> extends AbstractList<E> {
 			throw new NoSuchElementException();
 		}
 	}
-	
-	public static void main(String args[]) {
-		
-		LinkedList<String> myLL = new LinkedList<String>(); 
-		String a;
-		for (int i = 0 ; i < 20; i++) {
-			a = "" + i;
-			myLL.add(a);
-		}
-		
-		String ss = "bba";
-		myLL.addFirst(ss);
-		println(myLL);
-	}
-
-
-
-
-
 }
