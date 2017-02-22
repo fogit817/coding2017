@@ -37,6 +37,9 @@ public class ArrayListTest extends TestCase {
 		assertEquals(rawList.size(), 0);
 		rawList.add(new Date());
 		assertEquals(1, rawList.size());
+		rawList.add(5);
+		rawList.add("ABC");
+		rawList.add('f');
 	}
 
 	@Test
@@ -52,25 +55,16 @@ public class ArrayListTest extends TestCase {
 	@Test
 	public void testAddWithIndex() {
 		
-		myAL.add(5);
-		myAL.add(5);
-		myAL.add(5);
-		myAL.add(1,10);
-		int c = myAL.get(1);
-		assertEquals(10,c);
+		int size = getRandomNumber();
+		addIntWithNatureOrder(myAL, size);
+		int actual = 0;
 		
-		assertEquals(4,myAL.size());
-		myAL.add(4,15);
-		int a = myAL.get(0);
-		Integer b = myAL.get(1);
-		c =  myAL.get(2);
-		int d = myAL.get(3);
-		int e = myAL.get(4);
-		assertEquals(5,a);
-		assertEquals(new Integer(10),b);
-		assertEquals(5,c);
-		assertEquals(5,d);
-		assertEquals(15,e);
+		for (int i = 0; i < size; i++) {
+			myAL.add(i,-1*i);
+			actual = myAL.get(i);
+			assertEquals(-1*i, actual);
+		}
+
 	}
 	
 	@Test
