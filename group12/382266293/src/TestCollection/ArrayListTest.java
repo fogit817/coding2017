@@ -111,7 +111,7 @@ public class ArrayListTest extends TestCase {
 	@Test
 	public void testGrow() {
 		
-		int actualSize = 12345;
+		int actualSize = 3;
 		
 		addIntWithNatureOrder(myAL, actualSize);
 		assertEquals(actualSize,myAL.size());

@@ -5,7 +5,6 @@ import static util.TestUtil.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import Collection.Concrete.Queue;
 import junit.framework.TestCase;

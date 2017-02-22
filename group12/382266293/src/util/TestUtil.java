@@ -23,9 +23,8 @@ public class TestUtil<E> extends TestCase {
 	
 	public static void addIntWithNatureOrder(List<Integer> myList, int numbers) {
 		
-		int expected = Integer.MAX_VALUE - 100;
-		for (int acutal = 0; acutal < numbers ; acutal++) {
-			myList.add(acutal);
+		for (int i = 0; i < numbers ; i++) {
+			myList.add(i);
 		}
 	}
 	
@@ -45,8 +44,8 @@ public class TestUtil<E> extends TestCase {
 	public static void addString(List<String> myList, int num) {
 		
 		String actual;
-		for (int index = 0; index < num ; index++) {
-			actual = index + "";
+		for (int i = 0; i < num ; i++) {
+			actual = i + "";
 			myList.add(actual);
 		}
 	}

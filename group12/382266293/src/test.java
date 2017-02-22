@@ -10,18 +10,7 @@ import util.Print;
 public class test {
 	public static void main(String args[]) {
 		
-		Stack myStack = new Stack();
-		for (int i = 0; i < 10; i++) {
-			myStack.push(i);
-		}
-		println(myStack);
-		
-		int size = myStack.size();
-		for (int i = size; i > 0; i--) {
-			print("");
-			int actual = (int) myStack.pop();
-			println(i+" // "+ actual);
-		}
+		println(Integer.MAX_VALUE/3+Integer.MAX_VALUE);
 		
 	}
 }

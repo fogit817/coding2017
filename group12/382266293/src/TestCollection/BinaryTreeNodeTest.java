@@ -1,9 +1,11 @@
 package TestCollection;
 
-import static util.Print.*;
-import java.util.Random;
+import static util.TestUtil.*;
+
 import java.util.Set;
 import java.util.TreeSet;
+
+import static util.Print.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,19 +30,22 @@ public class BinaryTreeNodeTest extends TestCase {
 
 	@Test
 	public void testInsert() {
-		Random random = new Random();
+
 		Set<Integer> expected =  new TreeSet<Integer>();
-		int size = 50;
+		int size = getRandomNumber();
 		int j = 0 ;
 		while (expected.size() != size) {
-			j = random.nextInt(200);
+			j = getRandomNumber();
 			expected.add(j);
 			myTree.insert(j);
 		}
 		
 		assertEquals(size,myTree.size());
-		assertEquals(expected,myTree.preOrderTranverse(myTree));
+		assertEquals(expected.toString(),myTree.toString());
+		println(expected);
+		println(myTree);
 	}
+
 	
 	public void testSize() {
 		
@@ -48,7 +53,8 @@ public class BinaryTreeNodeTest extends TestCase {
 			myTree.insert(18);
 			myTree.insert(-19);
 			myTree.insert(1);
-			assertEquals(3,myTree.size());
+			myTree.insert(0);
+			assertEquals(4,myTree.size());
 		}	
 	}
 }

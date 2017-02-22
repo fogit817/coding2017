@@ -1,7 +1,5 @@
 package Collection.Concrete;
-
-import java.util.HashSet;
-import java.util.Set;
+import Collection.List;
 
 public class BinaryTreeNode<E extends Comparable<E>> {
 	
@@ -9,7 +7,7 @@ public class BinaryTreeNode<E extends Comparable<E>> {
 	private BinaryTreeNode left;
 	private BinaryTreeNode right;
 	private int size;
-	private static Set mySet = new HashSet();
+	private ArrayList<E> myList = new ArrayList<E>();
 	
 	
 	public BinaryTreeNode() {
@@ -65,19 +63,20 @@ public class BinaryTreeNode<E extends Comparable<E>> {
     
     
 
-    public Set<E> preOrderTranverse(BinaryTreeNode<E> node) {
+    public List<E> preOrderTraversal(BinaryTreeNode<E> node) {
         if (node != null) {
-        	preOrderTranverse(node.left);
-        	mySet.add(node.data);
-            preOrderTranverse(node.right);
+        	preOrderTraversal(node.left);
+        	myList.add(node.data);
+            preOrderTraversal(node.right);
         }
-        return mySet;
+        return myList;
     }
 
 	@Override
 	public String toString() {
-		preOrderTranverse(this);
-		return mySet.toString();
+		myList = new ArrayList<E>();
+		preOrderTraversal(this);
+		return myList.toString();
 	}
 
 	public E getData() {

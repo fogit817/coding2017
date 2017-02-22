@@ -4,7 +4,7 @@ public abstract class AbstractList<E> implements List<E> {
 
 	protected static final String PREFIX = "[";
 	protected static final String SUFFIX = "]";
-	protected static final String SEPERATOR = ",";
+	protected static final String SEPERATOR = ", ";
 	protected static final int MAX_SIZE = Integer.MAX_VALUE/3;
 	
 	protected void checkIndex(int i) {
