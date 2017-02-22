@@ -20,7 +20,7 @@ public abstract class AbstractList<E> implements List<E> {
 	public int indexOf(E e) {
 		Iterator<E> it = iterator();
 		for (int index = 0; it.hasNext(); index++) {
-			if (it.next()== e)
+			if (it.next().equals(e))
 				return index;
 		}
 		return -1;

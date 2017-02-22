@@ -1,8 +1,11 @@
 package TestCollection;
 
 import static util.Print.*;
+import static util.TestUtil.*; 
 import java.util.Date;
 import java.util.NoSuchElementException;
+import java.util.Random;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,12 +18,13 @@ import junit.framework.TestCase;
 
 public class LinkedListTest extends TestCase {
 
-	LinkedList<String> myLL;
+	private LinkedList<String> myLL;
+	private static Random random = new Random();
 	
 	@Before
 	public void setUp() throws Exception {
 		myLL = new LinkedList<String>();
-		assertEquals(true,myLL.isEmpty());
+		assertEquals(0,myLL.size());
 	}
 
 	@After
@@ -30,10 +34,10 @@ public class LinkedListTest extends TestCase {
 
 	@Test
 	public void testLinkedList() {
-		List bt = new LinkedList();
-		assertEquals(bt.size(), 0);
-		bt.add(new Date());
-		assertEquals(1, bt.size());
+		List rawList = new LinkedList();
+		assertEquals(rawList.size(), 0);
+		rawList.add(new Date());
+		assertEquals(1, rawList.size());
 		
 	}
 
@@ -47,12 +51,10 @@ public class LinkedListTest extends TestCase {
 	@Test
 	public void testAddStringE() {
 		String a;
-		for (int i = 0 ; i < 30; i++) {
-			a = "" + i;
-			myLL.add(a);
-			assertEquals(myLL.get(i),a);
-		}
-		for (int i = 0 ; i < 30; i++) {
+		
+		addString(myLL,30);
+
+		for (int i = 0 ; i < myLL.size(); i++) {
 			a = "" + i;
 			assertEquals(myLL.get(i),a);
 		}
@@ -75,91 +77,82 @@ public class LinkedListTest extends TestCase {
 	}
 	
 	public void testAddFirst() {
-		String a;
-		for (int i = 0 ; i < 20; i++) {
-			a = "" + i;
-			myLL.add(a);
-		}
+		String expected;
+		addString(myLL, 20);
 		
 		String ss = "bba";
 		myLL.addFirst(ss);
 		assertEquals(ss,myLL.get(0));
 		assertEquals(21, myLL.size());
-		
-		;
+
 		for (int i = 1 ; i < myLL.size(); i++) {
-			a = (i-1) + "";
-			assertEquals(a, myLL.get(i));
+			expected = (i-1) + "";
+			assertEquals(expected, myLL.get(i));
 		}		
 	}
 	
 	public void testAddLast() {
-		String a;
-		for (int i = 0 ; i < 25; i++) {
-			a = "" + i;
-			myLL.add(a);
-		}
+		String expected;
+		addString(myLL, 25);
 		
 		String ss = "25";
 		myLL.addLast(ss);
 		int size = myLL.size();
 		assertEquals(26, size);
+		assertEquals(ss, myLL.getLast());
 
 		for (int i = 0 ; i < size; i++) {
-			a = i + "";
-			assertEquals(a, myLL.get(i));
+			expected = i + "";
+			assertEquals(expected, myLL.get(i));
 		}		
 	}
 	
 	@Test
 	public void testRemoveFirst() {
 		
-		String a = "";
+		String expected = "";
 		String result = "";
-		for(int i = 0; i < 10; i++) {
-			myLL.add(i+"");
-		}
+		addString(myLL, 10);
 		
 		myLL.removeFirst();
 		assertEquals(9, myLL.size());
 
 		for(int i = 0; i < myLL.size(); i++) {
-			a = i+1 + "";
-			assertEquals(a, myLL.get(i));
+			expected = i+1 + "";
+			assertEquals(expected, myLL.get(i));
 		}
 		
 		int size = myLL.size();
 		for(int i = 0; i < size; i++) {
-			a = i+1 +"";
+			expected = i+1 +"";
 			result = myLL.removeFirst();
-			assertEquals(a, result);
+			assertEquals(expected, result);
 		}
 		
 		assertEquals(0, myLL.size());
+		
 	}
 	
 	@Test
 	public void testRemoveLast() {
 		
-		String a = "";
-		String result = "";
-		for(int i = 0; i < 10; i++) {
-			myLL.add(i+"");
-		}
+		String expected = "";
+		String actual = "";
+		addString(myLL, 10);
 		
 		myLL.removeLast();
 		assertEquals(9, myLL.size());
 
 		for(int i = 0; i < myLL.size(); i++) {
-			a = i + "";
-			assertEquals(a, myLL.get(i));
+			expected = i + "";
+			assertEquals(expected, myLL.get(i));
 		}
 		
 		int size = myLL.size();
 		for(int i = 0; i < size; i++) {
-			a = myLL.size()-1 +"";
-			result = myLL.removeLast();
-			assertEquals(a, result);
+			expected = myLL.size()-1 +"";
+			actual = myLL.removeLast();
+			assertEquals(expected, actual);
 		}
 		
 		assertEquals(0, myLL.size());
@@ -170,17 +163,16 @@ public class LinkedListTest extends TestCase {
 	@Test
 	public void testRemove() {
 		
-		String res = "";
-		String a = "";
-		for(int i = 0; i < 10; i++) {
-			myLL.add(i+"");
-		}
+		int size = random.nextInt(200);
+		String expected = "";
+		String actual = "";
+		addString(myLL,size);
 
 		for(int i = myLL.size()-1; i >= 0; i--) {
-			a = myLL.get(i);
-			res = myLL.remove(i);
+			expected = myLL.get(i);
+			actual = myLL.remove(i);
 			assertEquals(i, myLL.size());
-			assertEquals(a,res);
+			assertEquals(expected,actual);
 		}
 	}
 

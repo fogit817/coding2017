@@ -1,6 +1,7 @@
 package TestCollection;
 
 import static util.Print.*;
+import static util.TestUtil.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +17,7 @@ public class QueueTest extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		myQueue= new Queue<Integer>();
+		assertEquals(0, myQueue.size());
 	}
 
 	@After
@@ -25,12 +27,16 @@ public class QueueTest extends TestCase {
 
 	@Test
 	public void testIsEmpty() {
-		assertEquals(0, myQueue.size());
+		
+		assertEquals(true, myQueue.isEmpty());
+		enQueueIntWithNatureOrder(myQueue, getRandomNumber());
+		assertEquals(false, myQueue.isEmpty());
 	}
 
 	@Test
 	public void testEnQueue() {
-		for (int i = 0; i < 10; i++) {
+		
+		for (int i = 0; i < getRandomNumber(); i++) {
 			assertEquals(i, myQueue.size());
 			myQueue.enQueue(i);
 			int expected = i;
@@ -41,7 +47,8 @@ public class QueueTest extends TestCase {
 
 	@Test
 	public void testDeQueue() {
-		testEnQueue();
+		
+		enQueueIntWithNatureOrder(myQueue, getRandomNumber());
 		int size = myQueue.size();
 		for (int i = 0; i < size ; i++) {
 			assertEquals(size-i, myQueue.size());
@@ -52,13 +59,13 @@ public class QueueTest extends TestCase {
 	}
 
 	@Test
-	public void testelement() {
+	public void testElement() {
 		
 		int expected = 0;
 		int element1 = 0;
 		int repeated = 0;
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < getRandomNumber(); i++) {
 			myQueue.enQueue(i);
 			expected = i;
 			
@@ -84,9 +91,12 @@ public class QueueTest extends TestCase {
 
 	@Test
 	public void testAdd() {
-		for (int i = 0; i < 10; i++) {
-			myQueue.add(i);
-			Integer actual = new Integer(myQueue.get(i));
+		
+		int size = getRandomNumber();
+		enQueueIntWithNatureOrder(myQueue, size);
+		
+		for (int i = 0; i < size; i++) {
+			Integer actual = myQueue.get(i);
 			Integer expected = new Integer(i);
 			assertEquals(expected, actual);
 		}

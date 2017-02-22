@@ -7,11 +7,13 @@ import org.junit.Test;
 
 import Collection.Concrete.Stack;
 import junit.framework.TestCase;
+import static util.TestUtil.*;
 
+import java.util.Random; 
 public class StackTest extends TestCase {
 
-	Stack<Integer> myStack;
-	
+	private Stack<Integer> myStack;
+
 	@Before
 	public void setUp() throws Exception {
 		myStack= new Stack<Integer>();
@@ -24,20 +26,22 @@ public class StackTest extends TestCase {
 
 	@Test
 	public void testIsEmpty() {
-		assertEquals(0, myStack.size());
+		
+		assertEquals(true, myStack.isEmpty());
+		pushIntWithNatureOrder(myStack, getRandomNumber());
+		assertEquals(false, myStack.isEmpty());
 	}
 
 	@Test
 	public void testPush() {
-		for (int i = 0; i < 10; i++) {
-			assertEquals(i, myStack.size());
-			myStack.push(i);
-		}
+		
+		pushIntWithNatureOrder(myStack, getRandomNumber());
 	}
 
 	@Test
 	public void testPop() {
-		testPush();
+		
+		pushIntWithNatureOrder(myStack, getRandomNumber());
 		int size = myStack.size();
 		for (int i = size; i > 0; i--) {
 			assertEquals(i, myStack.size());
@@ -55,7 +59,7 @@ public class StackTest extends TestCase {
 		int peek1 = 0;
 		int repeated = 0;
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < getRandomNumber(); i++) {
 			myStack.push(i);
 			expected = i;
 			
@@ -72,7 +76,7 @@ public class StackTest extends TestCase {
 
 	@Test
 	public void testSize() {
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < getRandomNumber()*500; i++) {
 			assertEquals(i, myStack.size());
 			myStack.push(i);
 		}
@@ -80,7 +84,7 @@ public class StackTest extends TestCase {
 
 	@Test
 	public void testAdd() {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < getRandomNumber(); i++) {
 			myStack.add(i);
 			Integer actual = new Integer(myStack.get(i));
 			Integer expected = new Integer(i);
@@ -89,13 +93,14 @@ public class StackTest extends TestCase {
 	}
 
 	@Test
-	public void testPopPushAndPeek() {
-		for (int i = 0; i < 10; i++) {
+	public void testPushPopAndPeek() {
+		
+		for (int i = 0; i < getRandomNumber(); i++) {
 			int expected = i;
 			myStack.push(i);
-			int a = 0;
-			myStack.push(a);
-			myStack.pop();
+			int num = getRandomNumber();
+			pushIntWithNatureOrder(myStack, num);
+			popNumTimes(myStack,num);
 			int actual = myStack.peek();
 			assertEquals(expected, actual);
 		}

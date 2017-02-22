@@ -4,8 +4,6 @@ import static util.Print.*;
 import static util.TestUtil.*;
 import java.util.Date;
 import java.util.NoSuchElementException;
-import java.util.Random;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +16,6 @@ public class ArrayListTest extends TestCase {
 
 
 	private ArrayList<Integer> myAL;
-	private static Random rnd = new Random();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -47,17 +44,13 @@ public class ArrayListTest extends TestCase {
 		
 		assertEquals(true,myAL.isEmpty());
 		
-		myAL.add(5);
-		assertEquals(false,myAL.isEmpty());
-		
-		int num = rnd.nextInt(100);
-		addIntWithNatureOrder(myAL, num);
+		myAL.add(getRandomNumber());
 		assertEquals(false,myAL.isEmpty());
 		
 	}
 
 	@Test
-	public void testAddIntAutoBoxing() {
+	public void testAddWithIndex() {
 		
 		myAL.add(5);
 		myAL.add(5);
@@ -79,11 +72,26 @@ public class ArrayListTest extends TestCase {
 		assertEquals(5,d);
 		assertEquals(15,e);
 	}
+	
+	@Test
+	public void testGet() {
+		
+		int[] result = addRandomInt(myAL, getRandomNumber());
+		
+		int actual,expected;
+		
+		for (int i = 0; i < result.length; i++) {
+			actual = myAL.get(i);
+			expected = result[i];
+			assertEquals(expected, actual);
+		}
+
+	}
 
 	@Test
 	public void testRemove() {
 
-		addIntWithNatureOrder(myAL, 100);
+		addIntWithNatureOrder(myAL, getRandomNumber());
 		
 		testRemoveAndGetFromTail(myAL);
 
@@ -93,18 +101,12 @@ public class ArrayListTest extends TestCase {
 	public void testSize() {
 		
 		assertEquals(0,myAL.size());
-		
-		int num = rnd.nextInt(100);
-		addIntWithNatureOrder(myAL, num);
+		int num = getRandomNumber();
+		addRandomInt(myAL, num);
 		assertEquals(num,myAL.size());
 	}
 
-	@Test
-	public void testGet() {
-		
-		testAddIntWithNatureOrder(myAL, 20);
 
-	}
 	
 	@Test
 	public void testGrow() {
@@ -112,7 +114,6 @@ public class ArrayListTest extends TestCase {
 		int actualSize = 12345;
 		
 		addIntWithNatureOrder(myAL, actualSize);
-		
 		assertEquals(actualSize,myAL.size());
 	}
 	
@@ -120,8 +121,8 @@ public class ArrayListTest extends TestCase {
 	@Test
 	public void testIterator() {
 		
-		addIntWithNatureOrder(myAL,100);
-		
+		addIntWithNatureOrder(myAL,getRandomNumber());
+
 		Iterator<Integer> it = myAL.iterator();
 
 		for(int i = 0; it.hasNext(); i++){
@@ -129,26 +130,32 @@ public class ArrayListTest extends TestCase {
 			assertEquals(i,actual);
 		}
 		
+		boolean reachedException = false;
+		
 	    try {
 			it.next();
 	    } catch (NoSuchElementException ex) {
+	    	reachedException = true;
 	        assertEquals(ex.getClass(),NoSuchElementException.class);
 	    }
+	    
+	    assertEquals(true, reachedException);
+	    
 	}
 	
 	@Test
 	public void testIndexOf() {
 		
-		int num = 15;
-		addIntWithNatureOrder(myAL,num);
+		int size = getRandomNumber();
+		addIntWithNatureOrder(myAL,size);
 
-
-		for(int i = 0; i < num ; i++){
-			assertEquals(myAL.indexOf(i),i);
+		int expected,actual;
+		for (int i = 0; i < myAL.size(); i++) {
+			expected = i;
+			actual = myAL.indexOf(i);
+			assertEquals(expected, actual);
 		}
 
 	}
-	
 
-	
 }
