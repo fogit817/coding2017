@@ -2,7 +2,6 @@ package Collection.Concrete;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
-
 import Collection.AbstractList;
 import Collection.Iterator;
 
@@ -25,16 +24,23 @@ public class ArrayList<E> extends AbstractList<E> {
 	}
 
 	private void checkCapacity() {
-		if (size>INITIAL_SIZE-1) 
+		
+		if (elements.length == MAX_SIZE)
+			throw new IndexOutOfBoundsException("Reached max size.");
+		
+		if ( elements.length - size < INITIAL_SIZE) 
 			grow();
 	}
 
 	synchronized private void grow() {
-		E[] target = (E[]) new Object[size*3/2];
+
+		int newCapacity = size * 2;
+		newCapacity = newCapacity > MAX_SIZE ? MAX_SIZE : newCapacity;
+		E[] target = (E[]) new Object[newCapacity];
 		System.arraycopy(elements, 0, target, 0, size);
 		elements = target;
 	}
-	
+
 	public void add(int index, E e) {
 		checkCapacity();
 		if (index == size) {
@@ -54,6 +60,7 @@ public class ArrayList<E> extends AbstractList<E> {
 		checkIndex(index);
 			return elements[index];
 	}
+
 	
 	public E getLast() {
 		return get(size-1);
@@ -138,8 +145,5 @@ public class ArrayList<E> extends AbstractList<E> {
 			throw new NoSuchElementException();
 		}
 	}
-
-
-
 
 }
